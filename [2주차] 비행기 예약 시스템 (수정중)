@@ -1,0 +1,132 @@
+/* 일단 구상한 것
+main함수 안에 본격적인 예약 관련 코드가 들어갈 것
+자리 배치 같은 배열 약간 프론트엔드처럼 따로 사용자 설정 함수로 빼고, 필요할 때마다 갱신시켜서 쓰는게 괜찮을 듯
+아니면 main함수가 보기 너무 힘들 것 같음..
+
+예약좌석 함수가 main 밑에 들어가면 확인하기 힘드니까 헤드파일 밑에다가 그냥 바로 적어버리기!
+
+그리고 초기화면은 항상 뜨는 거니까 반복문 쓰면 될 것 같고 그냥 계속 굴려서 3번 입력 받았을 때 break 걸도록
+좌석 예약, 좌석 변경, 프로그램 종료 같은 화면은 해당 번호를 입력 받았을 때 -> 다음 저 3개의 케이스로 분류되니까
+if문 종류 사용해서 크게 먼저 분류해버리고, 해당 번호 if문 내부에서 관련 코드 실행하도록 구현하기!*/
+
+
+
+#include <iostream>
+using namespace std;
+
+
+// 좌석표
+int seat[3][4][6] = { 0 }
+void showSeat() {
+
+
+
+
+
+
+// 예약 시스템 구현
+int main() {
+	// 일단 메뉴 번호 입력 받을 변수, 누적으로 계산하기 위해 총 입력받을 total 어른과 total 아이 변수 설정
+	int menu;
+	int total_Adult = 0;
+	int total_Baby = 0;
+
+	// 사용자가 3번 입력하기 전까지 계속 돌리기 위해 while(1)로 설정 (3일때 break를 통해 멈출 계획임)
+	while (1) {
+		//일단 초기화면 출력하기 위해서 설정!
+		cout << "\n **비행기 예약 시스템** \n";
+		cout << "1. 좌석 예약 \n";
+		cout << "2. 좌석 변경 \n";
+		cout << "3. 프로그램 종료 \n";
+		cout << "번호를 입력하세요 : ";
+		cin >> menu;
+
+		// 위에서 menu 입력 받으면 해당 메뉴로 이동하기 위해 if문으로 각각 메뉴 구현
+		if (menu == 1) {
+			Seat(); //일단 좌석 먼저 보여줘야하니까 좌석 배열 불러오기
+
+			// total은 따로 해줄거니까, 일단 이때 입력받을 어른, 아이 수 각각 변수 설정해서 받기
+			int adult;
+			int baby;
+
+			cout << "성인(50000원): ";
+			cin >> adult;
+			cout << "\n 유아(40000원): ";
+			cin >> baby;
+
+			// 누적 금액은 아이와 어른을 합친 값 -> 누적하기 위해 += 연산자 사용해서 total_~~ 변수에 각각 저장
+			int total_Price = adult + baby;
+			total_Adult += adult;
+			total_Baby += baby;
+
+			for (int i = 0; i < total; i++) {
+				while (1) {
+					int zone, row, column;
+
+					cout << "\n 어떤 구역을 예약하시겠습니까? \n";
+					cin >> zone;
+					cout << "\n 몇열(세로), 몇번째(가로) 좌석을 예약하시겠습니까?";
+					cin >> row >> column;
+
+					if (zone < 1 || zone > 3 || row < 1 || row > 4 || column < 1 || column > 6) {
+						cout << "예약가능한 좌석이 아닙니다. \n";
+						continue;
+					}
+					
+					// 이미 예약한 좌석일 때 어떻게 받아야하지?
+
+					// 예약 완료 어떻게 함??
+
+				}
+			}
+		}
+		else if (menu == 2) {
+			showSeat();
+
+			int changeSeatCount;
+			cout << "바꿀 좌석의 갯수를 입력하세요 : ";
+			cin >> changeSeatCount;
+
+			for (int i = 0; i < changeSeatCount;, i++) {
+				while (1) {
+					int zone1;
+					int row1;
+					int column1;
+					int new_zone;
+					int new_row;
+					int new_column;
+
+					cout << "\n현재 좌석과 바꿀 좌석을 입력하세요. \n";
+					cout << "현재 좌석 (H구역 N열 M번째): ";
+					cin >> zone1 >> row1 >> column1;
+					cout << "\n 변경 좌석 (H구역 N열 M번째): ";
+					cin >> new_zone >> new_row >> new_column;
+
+					if (zone1 < 1 || zone1 < 3 || row1 < 1 || row1 > 4 || column1 < 1 || column1> 6 || new_zone < 1 || new_zone > 3 || new_row < 1 || new_row > 4 || new_column < 1 || new_column > 6) {
+						cout << "\n좌석 번호를 다시 입력해주세요 \n";
+						continue;
+					}
+
+					// 현재 좌석이 예약 되어 있는지
+
+					if (zone1 == new_zone && row1 == new_row && column1 == new_column) {
+						cout << "\n은 좌석입니다. 다른 좌석을 선택하세요\n";
+						continue;
+					}
+
+					// 변경 좌석이 이미 예약되어 있는지
+
+					// 변경 완료
+				}
+			}
+			showSeat();
+		}
+		else {
+			showSeat();
+
+			int total_Price = total_Adult * 50000 + total_Baby * 40000;
+			cout << "총 " << total_Price << "원 입니다.";
+			break;
+	}
+		return 0;
+}
