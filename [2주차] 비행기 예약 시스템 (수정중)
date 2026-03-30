@@ -14,14 +14,25 @@ if문 종류 사용해서 크게 먼저 분류해버리고, 해당 번호 if문 
 #include <iostream>
 using namespace std;
 
+int seat[3][4][6]; // [구역][행][열]
 
 // 좌석표
-int seat[3][4][6] = { 0 }
+
 void showSeat() {
+    for (int z = 0; z < 3; z++) {
+        cout << "\n1 2 3    4 5 6    (" << z + 1 << "구역)\n";
+        cout << "-------------------\n";
 
-
-
-
+        for (int r = 0; r < 4; r++) {
+            for (int c = 0; c < 6; c++) {
+                if (c == 3) cout << "   "; // 통로
+                cout << seat[z][r][c] << " ";
+            }
+            cout << endl;
+        }
+        cout << "-------------------";
+    }
+}
 
 
 // 예약 시스템 구현
